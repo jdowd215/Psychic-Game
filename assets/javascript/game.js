@@ -5,29 +5,53 @@ var alphabet = ['a','b','c','d','e','f','g','h','i','j','k','l',
 var wins = 0;
 var losses = 0;
 var guesses = 10;
-var lettersguessed = [];
+var computerChoice;
+var lettersGuessed = [];
 // Randomly chooses a letter from our alphabet variable
-    var computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
+    computerChoice = alphabet[Math.floor(Math.random() * alphabet.length)];
 //check to make sure computer is selecting a letter
-    console.log(computerChoice)
+    console.log(computerChoice)    
+
+//selects the html elements and displays wins, losses, and guesses left  
+    document.getElementById("Wins").innerHTML = "Wins: " + wins;
+    document.getElementById("Losses").innerHTML = "Losses: " + losses;
+    document.getElementById("Guesses_left").innerHTML = "Guesses left: " + guesses;
+    document.getElementById("Guesses_so_far").innerHTML = "Guesses so far: " + lettersGuessed;
+
 //function to keep tally of our wins, losses, and guesses remaining
     document.onkeyup = function(event) {
         var userGuess = event.key;
     
         if(userGuess === computerChoice){
             wins++;
+            guesses = 10;
+            lettersGuessed = [];
         }
 
         else{
             guesses--;
+        
+        if(userGuess !== computerChoice){
+            lettersGuessed.push(userGuess);
         }
-    
+
+        }
+    //lettersguessed.push(userGuess)
         if(guesses === 0){
-            losses++
+            losses++;
+            guesses = 10;
+            lettersGuessed = [];
         }
-//selects the html elements and displays wins, losses, and guesses left    
+
+
+    //selects the html elements and displays wins, losses, and guesses left  
         document.getElementById("Wins").innerHTML = "Wins: " + wins;
         document.getElementById("Losses").innerHTML = "Losses: " + losses;
-        document.getElementById("Guesses left").innerHTML = "Guesses left: " + guesses;
-        document.getElementById("Your guesses so far").innerHTML = "Your guesses so far: " + lettersguessed;
+        document.getElementById("Guesses_left").innerHTML = "Guesses left: " + guesses;
+        document.getElementById("Guesses_so_far").innerHTML = "Guesses so far: " + lettersGuessed;
+
     }
+
+
+    //.keycode 65-90 for numeric keys
+    
